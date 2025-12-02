@@ -1,0 +1,206 @@
+/* --- CSS VARIABLES --- */
+:root {
+    --bg-color: #121212;         /* Dark background (Endless Vibe) */
+    --text-main: #FFFFFF;        /* White text (Used for Name/Headers) */
+    --text-muted: #B0B0B0;       /* Light grey for less important text */
+    --royal-blue: #4169E1;       /* The Royal Blue accent */
+    --fade-duration: 0.6s;
+}
+
+/* --- GLOBAL RESET & FONT SETTING --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Applying the requested font stack and background color */
+body {
+    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* --- CONTAINER (Used for centering, but background/shadow removed for endless feel) --- */
+.container {
+    width: 100%;
+    max-width: 650px; 
+    padding: 40px 20px;
+    text-align: center;
+    /* Removed background-color and box-shadow to achieve the "endless" dark mode look */
+}
+
+/* --- HEADSHOT --- */
+.headshot-container {
+    margin-bottom: 25px;
+}
+
+.headshot {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    /* Royal Blue border adds focus */
+    border: 4px solid var(--royal-blue); 
+    box-shadow: 0 0 0 6px rgba(65, 105, 225, 0.2);
+}
+
+/* --- TYPOGRAPHY --- */
+h1 {
+    font-size: 2.2rem;
+    letter-spacing: 3px;
+    font-weight: 900;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    color: var(--text-main); /* Name set to WHITE as per mockup */
+}
+
+.credentials {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    line-height: 1.8;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pipe {
+    color: var(--text-main);
+    font-weight: 500;
+    margin: 0 6px;
+}
+
+.email-link {
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 40px;
+    color: var(--royal-blue);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.email-link:hover {
+    color: var(--text-main);
+    text-decoration: underline;
+}
+
+/* --- BUTTON LINKS --- */
+.links-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns on desktop/tablet */
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    padding: 15px 10px;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    /* CAPSULE SHAPE IMPLEMENTATION */
+    border-radius: 9999px; 
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    text-align: center;
+    min-height: 50px;
+    cursor: pointer;
+}
+
+/* Primary Hierarchy: Filled Royal Blue (For PORTFOLIO) */
+.btn-primary {
+    grid-column: 1 / -1; /* Make Portfolio span full width */
+    background-color: var(--royal-blue);
+    color: #fff;
+    border: 1px solid var(--royal-blue);
+    box-shadow: 0 4px 15px rgba(65, 105, 225, 0.4);
+}
+
+.btn-primary:hover {
+    background-color: #5d83ff; 
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 6px 20px rgba(65, 105, 225, 0.6);
+}
+
+/* Secondary Hierarchy: Outlined (Default/Tertiary links have a dark outline) */
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-muted);
+    border: 1px solid #383838; 
+}
+
+/* Special links (Thesis, Construction) use a Royal Blue outline for secondary hierarchy */
+.focused-link {
+    border-color: var(--royal-blue);
+    color: var(--royal-blue);
+}
+
+.btn-secondary:hover {
+    border-color: #8cafff;
+    color: #fff;
+    background-color: rgba(65, 105, 225, 0.1);
+    transform: translateY(-1px);
+}
+
+.focused-link:hover {
+    background-color: var(--royal-blue);
+    color: #fff;
+}
+
+
+/* --- FOOTER --- */
+footer {
+    margin-top: 20px;
+    font-size: 0.7rem;
+    color: #555;
+    letter-spacing: 0.5px;
+}
+
+/* --- DYNAMIC ANIMATION STYLES (FADE-IN) --- */
+.initial-hidden {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity var(--fade-duration) ease-out, transform var(--fade-duration) ease-out;
+}
+
+
+/* --- MOBILE RESPONSIVENESS (BREAKPOINT) --- */
+@media (max-width: 600px) {
+    .container {
+        padding: 30px 15px;
+    }
+
+    h1 { font-size: 1.8rem; }
+    .headshot { width: 140px; height: 140px; }
+    .credentials { font-size: 0.75rem; letter-spacing: 1px;}
+    
+    /* Force links to stack vertically on mobile */
+    .links-container {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    /* Primary link remains full width */
+    .btn-primary {
+        grid-column: auto; 
+    }
+}
